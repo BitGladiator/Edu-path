@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: edupath-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python scripts/seed.py
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.5
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: CORS_ORIGINS
+        value: "*"
